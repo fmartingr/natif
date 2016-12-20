@@ -1,0 +1,24 @@
+{
+  "name": "natif",
+  "version": "0.1.0",
+  "description": "Load webpages as native OS applications",
+  "main": "main.js",
+  "bin": "./main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/fmartingr/natif",
+  "keywords": [
+    "Webpage",
+    "native"
+  ],
+  "author": "Felipe Martin",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-packager": "^8.4.0"
+  }
+}
