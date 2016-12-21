@@ -6,6 +6,7 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 const session = electron.session
+const dialog = electron.dialog
 
 const path = require('path')
 const argv = require('minimist')(process.argv.slice(1));
@@ -27,6 +28,7 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     session: siteSession,
+    show: false,
     webPreferences: {
       nodeIntegration: false
     }
@@ -35,7 +37,8 @@ function createWindow () {
   mainWindow.setMenu(null)
 
   // Enable the DevTools if the debug flag is set
-  if (argv.debug) mainWindow.webContents.openDevTools()
+  //if (argv.debug)
+    mainWindow.webContents.openDevTools()
 
   console.log('Loading URL: ' + siteUrl)
 
@@ -48,6 +51,21 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+  })
+
+  mainWindow.webContents.on('did-fail-load', function(event, errorCode, errorDescription) {
+    console.log(errorDescription)
+    dialog.showErrorBox('Error loading website', `
+    URL: ${siteUrl}
+    Error: ${errorCode} (${errorDescription})
+
+    Make sure you didn't misstype the URL and try again.`)
+    mainWindow.close()
+  })
+
+  // Display window when page is fully loaded
+  mainWindow.once('ready-to-show', function () {
+    mainWindow.show()
   })
 }
 
