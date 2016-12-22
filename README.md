@@ -1,6 +1,8 @@
 Natif
 =====
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/312c22c1d7064f1c85c82368b3d0ab84)](https://www.codacy.com/app/fmartingr/natif?utm_source=github.com&utm_medium=referral&utm_content=fmartingr/natif&utm_campaign=badger)
+
 Load webpages as if they where native OS applications.
 
 ## Summary
