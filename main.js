@@ -9,7 +9,13 @@ const session = electron.session
 const dialog = electron.dialog
 
 const path = require('path')
-const argv = require('minimist')(process.argv.slice(1));
+const parseArguments = require('minimist')
+
+const argDefaults = {
+  'title': null
+}
+
+const argv = parseArguments(process.argv.slice(1), {default: argDefaults});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -17,6 +23,8 @@ let mainWindow
 
 const siteUrl = argv._.slice(-1)[0]
 const siteSessionId = siteUrl.replace(/\//g, '_')
+const windowTitle = argv.title
+
 let siteSession
 
 appUserDataPath = app.getPath('userData')
@@ -29,6 +37,7 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     session: siteSession,
     show: false,
+    title: windowTitle,
     webPreferences: {
       nodeIntegration: false
     }
