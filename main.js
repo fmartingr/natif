@@ -37,7 +37,7 @@ function createWindow () {
   mainWindow.setMenu(null)
 
   // Enable the DevTools if the debug flag is set
-  //if (argv.debug)
+  if (argv.debug)
     mainWindow.webContents.openDevTools()
 
   console.log('Loading URL: ' + siteUrl)
