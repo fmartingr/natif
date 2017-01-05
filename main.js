@@ -37,7 +37,6 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     session: siteSession,
     show: false,
-    title: windowTitle,
     webPreferences: {
       nodeIntegration: false
     }
@@ -70,6 +69,11 @@ function createWindow () {
 
     Make sure you didn't misstype the URL and try again.`)
     mainWindow.close()
+  })
+
+
+  mainWindow.webContents.on('did-finish-load', function(event) {
+    mainWindow.setTitle(windowTitle)
   })
 
   // Display window when page is fully loaded
