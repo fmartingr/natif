@@ -32,6 +32,13 @@ app.setPath("userData", path.join(appUserDataPath, "sessions", siteSessionId))
 
 // TODO check for required arguments
 
+var handleRedirect = function(e, url) {
+  if(url != mainWindow.webContents.getURL()) {
+    e.preventDefault()
+    electron.shell.openExternal(url)
+  }
+}
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -77,6 +84,9 @@ function createWindow () {
   mainWindow.once("ready-to-show", function () {
     mainWindow.show()
   })
+
+  mainWindow.webContents.on("will-navigate", handleRedirect)
+  mainWindow.webContents.on("new-window", handleRedirect)
 }
 
 function init () {
